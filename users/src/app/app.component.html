@@ -1,36 +1,8 @@
 <div class="container">
-  <h1>{{title}}</h1>
   
-  <div class="container">
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input type="text" class="form-control" id="firstName" placeholder="Your First Name"required autofocus [(ngModel)]="firstName" />
-    </div>
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" placeholder="Your Last Name" required [(ngModel)]="lastName" />
-    </div>
-    <div class="form-group">
-      <label for="emailInput">Email</label>
-      <input type="text" class="form-control" id="emailInput" placeholder="(optional)" [(ngModel)]="emailInput" />
-    </div>
-    <!-- Property Binding: [ ] -->
-    <button type="button" class="btn btn-primary" [disabled]="addUser" (click)="onAddNewUser()">Add</button>
-    <button type="button" class="btn btn-secondary" (click)="onReset()">Clear</button>
-  </div>
-  <div class="container" id="userList">
-      <hr />
-      <h3>Users</h3>
-      <!--
-        String Interpolation: Whatever is evaluated in the TypeScript expression inside the String Interpolation braces {{ }} resolves to a String.
-        {{ TypeScript_Expression }}  => result is a String
-      -->
-      {{newUser}}
-  </div>
+  <app-head1></app-head1>
+
+  <app-user></app-user>
   
-  <div class="container">
-    <hr />
-    <!-- Even though currentYear is defined as type number in app.component.ts, it resolves to a string -->
-    <footer class="pull-right">&copy; {{getCurrentYear()}}</footer>
-  </div>
+  <app-footer1></app-footer1>
 </div>
