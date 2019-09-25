@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule }  from '@angular/router';
 
@@ -7,8 +8,9 @@ import { AppComponent } from './app.component';
 import { Head1Component } from './head1/head1.component';
 import { Footer1Component } from './footer1/footer1.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './providers/auth.service';
 import { UserComponent } from './user/user.component';
+
+import { AuthService } from './providers/auth.service';
 import { UsersService } from './providers/users.service';
 
 
@@ -26,6 +28,7 @@ const appRoutes: Routes = [
     LoginComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes)

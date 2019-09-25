@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject, of} from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { User } from '../user/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  users: User[] = [];
 
-  constructor() { }
+  private usersEndpoint: string = 'http://localhost:3000/users/';
+	private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
-  users: User[] = [
-    // new User("Neo", "Vu", "neo@test.com"),
-    // new User("Sara", "Chandy", "sara@test.com"),
-    // new User("Cate", "Speakeman", "cate@test.com")
-  ];
+  constructor(private http: HttpClient) {}
 
-  getUsers(): Array<any> {
-    return this.users;
+  getUsers(): Observable<any> {
+    return this.http.get(this.usersEndpoint, this.httpOptions)
+      .pipe(map(res => <any[]>res));
   }
 
   addUser(firstName, lastName, email) {

@@ -26,8 +26,8 @@ export class UserComponent implements OnInit {
                .subscribe(params => {
                   this.userName = params['username'];
                 });
-
-    this.users = this.usersService.getUsers();
+    this.usersService.getUsers().subscribe(data => {
+      this.users = data.users});
   }
 
   firstName: string = "Foo";
