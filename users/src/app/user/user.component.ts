@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { User } from './user.model';
+import { UsersService } from '../providers/users.service';
 
 @Component({
   selector: 'app-user',
@@ -7,17 +10,25 @@ import { User } from './user.model';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  sub: any;
+  userName: string = '';
 
-  constructor() { }
+  users: any[] = [];
+
+  constructor(
+    private usersService: UsersService,
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit() {
-  }
+    this.sub = this.route
+               .queryParams
+               .subscribe(params => {
+                  this.userName = params['username'];
+                });
 
-  users: User[] = [
-    new User("Neo", "Vu", "neo@test.com"),
-    new User("Sara", "Chandy", "sara@test.com"),
-    new User("Cate", "Speakeman", "cate@test.com")
-  ];
+    this.users = this.usersService.getUsers();
+  }
 
   firstName: string = "Foo";
   lastName: string = "Bar";
@@ -32,10 +43,9 @@ export class UserComponent implements OnInit {
     return this.currentYear;
   }
 
-  // executed when Add Mountain is clicked
+  // executed when Add User is clicked
   onAddNewUser(): void {
-    let obj = {"firstName": this.firstName, "lastName": this.lastName, "email": this.emailInput};
-    this.users.push(obj);
+    this.users = this.usersService.addUser(this.firstName, this.lastName, this.emailInput);
     this.addNewUser = true;
     this.newUserAdded = true;
   }
@@ -47,6 +57,10 @@ export class UserComponent implements OnInit {
     this.emailInput = '';
     //this.addNewUser = false;
     //this.newUserAdded = false;
+  }
+
+  onLogout() {
+    this.router.navigate(['/']);
   }
 
   getColor(): string {

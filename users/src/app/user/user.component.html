@@ -1,4 +1,6 @@
 <div class="container">
+  <h3>User: {{userName}} <span class="pull-right"><button type="button" class="btn btn-primary" (click)="onLogout()">Logout</button></span></h3>
+  <hr />
   <div class="container">
     <div class="form-group">
       <label for="firstName">First Name</label>
@@ -40,7 +42,7 @@
       </div>
     <ng-template #noUsers>No Users Added.</ng-template>
   </div>
-      
+
   <div class="container">
     <hr />
     <!-- Even though currentYear is defined as type number in app.component.ts, it resolves to a string -->
